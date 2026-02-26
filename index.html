@@ -3,78 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | PriceAlerts.org is now Open Source</title>
-    <meta name="robots" content="noindex, follow">
+    
+    <title>PriceAlerts | Open Source Grocery Price Comparison Platform</title>
+    <meta name="description" content="PriceAlerts is a production-ready, open-source grocery price comparison engine. Build your own 'Kayak for groceries' using React, Node.js, and PostgreSQL.">
+    <meta name="keywords" content="open source, price comparison, grocery tracker, react project, node.js, postgresql, grocery deals, price history charts">
+    <link rel="canonical" href="https://pricealerts.org/" />
+
+    <meta property="og:title" content="PriceAlerts - Open Source Grocery Comparison">
+    <meta property="og:description" content="The production-ready platform for tracking grocery prices is now open to the community.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pricealerts.org/">
+
     <style>
+        :root {
+            --primary: #22c55e;
+            --secondary: #0f172a;
+            --slate-100: #f1f5f9;
+            --slate-600: #475569;
+            --slate-900: #0f172a;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #f4f7f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #2c3e50;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            color: var(--slate-900);
+            line-height: 1.7;
+            background: #fff;
+        }
+
+        .navbar {
             padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--slate-100);
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        .container {
-            background: #ffffff;
-            padding: 3.5rem 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+
+        .logo-text { font-weight: 800; font-size: 1.25rem; color: var(--secondary); letter-spacing: -0.5px; }
+
+        .hero {
+            padding: 80px 20px;
             text-align: center;
-            max-width: 600px;
-            width: 100%;
-            border-top: 6px solid #27ae60;
+            background: radial-gradient(circle at top right, #f0fdf4, #fff);
         }
-        .logo {
-            font-size: 1.1rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #2c3e50;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
+
+        .hero h1 { font-size: 3.5rem; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        .hero p { font-size: 1.25rem; color: var(--slate-600); max-width: 700px; margin: 0 auto 30px; }
+
+        .section { max-width: 1000px; margin: 60px auto; padding: 0 20px; }
+        .section-title { font-size: 2rem; margin-bottom: 40px; text-align: center; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-        h1 { font-size: 2.2rem; margin-bottom: 1.5rem; color: #1a1a1a; letter-spacing: -0.5px; }
-        p { font-size: 1.1rem; margin-bottom: 1.5rem; color: #5d6d7e; }
-        .os-box {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2.5rem 0;
+
+        .feature-item {
+            padding: 30px;
+            border: 1px solid var(--slate-100);
+            border-radius: 16px;
+            transition: 0.3s;
         }
-        .github-btn {
-            display: inline-block;
-            background: #24292e;
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
+        .feature-item:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .feature-item h3 { margin-bottom: 10px; color: var(--secondary); }
+
+        .tech-pill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .tech-pill {
+            background: var(--slate-100);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-top: 1rem;
-            transition: transform 0.2s, background 0.2s;
         }
-        .github-btn:hover { background: #444; transform: translateY(-2px); }
-        .contact-section { font-size: 0.95rem; color: #7f8c8d; }
-        .contact-section a { color: #27ae60; text-decoration: none; font-weight: 600; }
+
+        .cta-footer {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .btn-github {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .details-list {
+            list-style: none;
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .details-list li::before { content: "✓ "; color: var(--primary); font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .details-list { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">PriceAlerts.org</div>
-        <h1>The mission continues.</h1>
-        <p>After years of tracking deals, PriceAlerts.org has officially sunset its hosted service. We are deeply grateful for the community we built together.</p>
-        <div class="os-box">
-            <h2>🚀 Now Open Source</h2>
-            <p>We’ve released our entire platform code. We encourage you to <strong>build your own price comparison engine</strong> using our core technology.</p>
-            <a href="https://github.com/your-username/pricealerts" class="github-btn">View Code on GitHub</a>
+
+    <nav class="navbar">
+        <div class="logo-text">PriceAlerts.org</div>
+        <div>
+            <a href="https://github.com/yourusername/pricealerts" style="text-decoration: none; color: var(--slate-600); font-weight: 600;">GitHub</a>
         </div>
-        <div class="contact-section">
-            <p>For bugs, improvements, or technical support:</p>
-            <p><a href="mailto:admin@pricealerts.org">admin@pricealerts.org</a></p>
+    </nav>
+
+    <header class="hero">
+        <div class="section">
+            <h1>The Kayak for Groceries is now <span style="color: var(--primary);">Open Source</span></h1>
+            <p>We’ve sunset our hosted service to empower the developer community. PriceAlerts is now a production-ready platform for real-time price comparison and automated deal discovery.</p>
+            <a href="https://github.com/yourusername/pricealerts" class="btn-github">Clone the Repository</a>
         </div>
-    </div>
+    </header>
+
+    
+
+    <main class="section">
+        <h2 class="section-title">Fully-Featured & Production Ready</h2>
+        
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>Real-Time Comparison</h3>
+                <p>Advanced engine to compare prices across multiple stores side-by-side with interactive Recharts-powered price history.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Automated Data Sync</h3>
+                <p>Supports Google Sheets (via JSONSheets.com), Clover POS API, and custom REST integrations for auto-updating prices.</p>
+            </div>
+            <div class="feature-item">
+                <h3>SEO & SSR Optimized</h3>
+                <p>Built-in Server Side Rendering for crawlers, automatic sitemaps, and Schema.org JSON-LD structured data.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Modern Tech Stack</h3>
+                <div class="tech-pill-container">
+                    <span class="tech-pill">React 18</span>
+                    <span class="tech-pill">TypeScript</span>
+                    <span class="tech-pill">Node.js</span>
+                    <span class="tech-pill">PostgreSQL</span>
+                    <span class="tech-pill">Tailwind CSS</span>
+                </div>
+            </div>
+        </div>
+
+        <ul class="details-list">
+            <li>Interactive Price History Charts</li>
+            <li>Admin Dashboard for Site Owners</li>
+            <li>Dark / Light Mode Support</li>
+            <li>Mobile Responsive (PWA Ready)</li>
+            <li>Google Analytics 4 Integration</li>
+            <li>Ad Management (17 Native Slots)</li>
+            <li>City-Based Deal Discovery</li>
+            <li>Multi-Currency Support</li>
+        </ul>
+    </main>
+
+    
+
+    <section class="cta-footer">
+        <div class="section">
+            <h2>Start building today.</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px;">Released under the MIT License. Free for personal and commercial use.</p>
+            <a href="https://github.com/yourusername/pricealerts" class="btn-github">View on GitHub</a>
+            <p style="margin-top: 40px; font-size: 0.9rem;">
+                Support & Bug Reports: <a href="mailto:admin@pricealerts.org" style="color: var(--primary);">admin@pricealerts.org</a>
+            </p>
+        </div>
+    </section>
+
 </body>
 </html>
