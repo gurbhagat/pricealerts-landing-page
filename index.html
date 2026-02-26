@@ -7,72 +7,55 @@
   <meta name="description" content="PriceAlerts is now open source. Thank you to every shopper, contributor, and partner who trusted us. The grocery price comparison platform lives on — free for everyone to use, build, and improve." />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <meta property="og:title" content="PriceAlerts — Thank You | Now Open Source" />
   <meta property="og:description" content="PriceAlerts is now open source. Thank you to every shopper, contributor, and partner who trusted us." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pricealerts.org" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="PriceAlerts — Thank You | Now Open Source" />
-  <meta name="twitter:description" content="PriceAlerts is now open source. The grocery price comparison platform lives on — free for everyone." />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #0080ff;
-      --primary-dark: #0066cc;
-      --bg: #f8f9fc;
-      --bg-card: #ffffff;
-      --bg-hero: #0a0f1e;
-      --text: #1a1f36;
-      --text-secondary: #4a5568;
-      --text-muted: #718096;
-      --border: #e2e8f0;
-      --border-card: #edf2f7;
-      --green: #22c55e;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --shadow-card: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-hover: 0 8px 24px rgba(0,128,255,0.12);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d1117;
-        --bg-card: #161b22;
-        --text: #e6edf3;
-        --text-secondary: #8b949e;
-        --text-muted: #6e7681;
-        --border: #30363d;
-        --border-card: #21262d;
-        --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-        --shadow-hover: 0 8px 24px rgba(0,128,255,0.2);
-      }
+      --primary: #10b981; /* Emerald */
+      --primary-glow: rgba(16, 185, 129, 0.3);
+      --accent: #3b82f6; /* Blue */
+      --bg: #020617; /* Darkest Navy */
+      --bg-card: #0f172a; /* Navy Slate */
+      --bg-hero: #020617;
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: #1e293b;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --glass: rgba(15, 23, 42, 0.8);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      font-size: 16px;
+      overflow-x: hidden;
     }
 
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--primary); text-decoration: none; transition: 0.2s; }
+    a:hover { filter: brightness(1.2); }
 
     /* ── HEADER ── */
     .site-header {
-      background: var(--bg-card);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 16px 24px;
       display: flex;
@@ -80,484 +63,267 @@
       justify-content: space-between;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 20px;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 22px;
       color: var(--text);
-      text-decoration: none;
     }
 
     .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--primary);
-      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 18px;
       font-weight: 800;
-      flex-shrink: 0;
+      box-shadow: 0 0 15px var(--primary-glow);
     }
 
     .header-badge {
-      background: #fff3cd;
-      color: #856404;
-      border: 1px solid #ffc107;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--primary);
       border-radius: 20px;
-      padding: 4px 12px;
+      padding: 6px 16px;
       font-size: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .header-badge {
-        background: #332d00;
-        color: #ffc107;
-        border-color: #664e00;
-      }
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     /* ── HERO ── */
     .hero {
-      background: var(--bg-hero);
-      background-image: radial-gradient(ellipse at 20% 50%, rgba(0,128,255,0.15) 0%, transparent 60%),
-                        radial-gradient(ellipse at 80% 20%, rgba(0,200,150,0.08) 0%, transparent 50%);
-      padding: 96px 24px 80px;
+      position: relative;
+      padding: 120px 24px 100px;
       text-align: center;
-      color: white;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.15), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .hero-eyebrow {
       display: inline-block;
-      background: rgba(0,128,255,0.2);
-      border: 1px solid rgba(0,128,255,0.4);
-      border-radius: 20px;
-      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 8px 20px;
       font-size: 13px;
       font-weight: 600;
-      color: #60a5fa;
-      margin-bottom: 24px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      backdrop-filter: blur(5px);
     }
 
     .hero h1 {
-      font-size: clamp(32px, 6vw, 60px);
+      font-size: clamp(38px, 7vw, 72px);
       font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 32px;
+      letter-spacing: -0.04em;
     }
 
     .hero h1 span {
-      background: linear-gradient(135deg, #60a5fa, #34d399);
+      background: linear-gradient(to right, var(--primary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     .hero-sub {
-      font-size: clamp(16px, 2.5vw, 20px);
-      color: rgba(255,255,255,0.7);
-      max-width: 640px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: var(--text-secondary);
+      max-width: 750px;
+      margin: 0 auto 48px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
+      gap: 10px;
+      padding: 16px 32px;
       border-radius: var(--radius-sm);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-      text-decoration: none;
-      border: none;
-      white-space: nowrap;
+      font-size: 16px;
+      font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    .btn:hover { transform: translateY(-1px); text-decoration: none; }
-    .btn:active { transform: translateY(0); }
 
     .btn-primary {
       background: var(--primary);
       color: white;
-      box-shadow: 0 4px 14px rgba(0,128,255,0.4);
+      box-shadow: 0 10px 25px -5px var(--primary-glow);
     }
 
-    .btn-primary:hover { box-shadow: 0 6px 20px rgba(0,128,255,0.5); opacity: 0.93; }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 30px -10px var(--primary-glow);
+    }
 
     .btn-outline {
-      background: rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.03);
       color: white;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .btn-outline:hover { background: rgba(255,255,255,0.14); }
-
-    .btn-outline-dark {
-      background: transparent;
-      color: var(--primary);
-      border: 1px solid var(--primary);
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
-    .btn-outline-dark:hover { background: rgba(0,128,255,0.06); }
-
-    /* ── STATS BAR ── */
+    /* ── STATS ── */
     .stats-bar {
-      background: var(--primary);
-      padding: 20px 24px;
+      border-y: 1px solid var(--border);
+      padding: 40px 24px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .stats-inner {
-      max-width: 960px;
+      max-width: 1100px;
       margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 32px;
-    }
-
-    .stat {
-      text-align: center;
-      color: white;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 40px;
     }
 
     .stat-number {
-      font-size: 26px;
+      font-size: 32px;
       font-weight: 800;
-      line-height: 1;
-      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
     }
 
     .stat-label {
       font-size: 12px;
-      opacity: 0.85;
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* ── SECTION WRAPPER ── */
-    .section {
-      padding: 72px 24px;
-    }
-
-    .section-alt {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .container {
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      color: var(--text-muted);
       text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 12px;
+      letter-spacing: 0.1em;
     }
 
-    .section-title {
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 14px;
-      letter-spacing: -0.01em;
-    }
+    /* ── FEATURES ── */
+    .section { padding: 100px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label { color: var(--primary); font-weight: 800; text-transform: uppercase; font-size: 12px; margin-bottom: 16px; letter-spacing: 0.2em; }
+    .section-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .section-desc { color: var(--text-secondary); font-size: 19px; max-width: 700px; margin: 0 auto; }
 
-    .section-desc {
-      font-size: 17px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      line-height: 1.7;
-    }
-
-    .section-header {
-      margin-bottom: 48px;
-    }
-
-    /* ── FEATURE GRID ── */
     .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary);
+      background: rgba(16, 185, 129, 0.03);
+      transform: translateY(-8px);
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .feature-desc { color: var(--text-secondary); font-size: 15px; }
+
+    /* ── GITHUB BOX ── */
+    .github-box {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid var(--border);
+      padding: 40px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin: 48px 0;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .github-box-text strong { font-size: 20px; display: block; margin-bottom: 4px; }
+
+    /* ── ROADMAP ── */
+    .roadmap-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow-card);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .feature-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
-    }
-
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 14px;
-      flex-shrink: 0;
-    }
-
-    .icon-blue   { background: rgba(0,128,255,0.1); }
-    .icon-green  { background: rgba(34,197,94,0.1); }
-    .icon-purple { background: rgba(139,92,246,0.1); }
-    .icon-orange { background: rgba(249,115,22,0.1); }
-    .icon-teal   { background: rgba(20,184,166,0.1); }
-    .icon-red    { background: rgba(239,68,68,0.1); }
-    .icon-yellow { background: rgba(234,179,8,0.1); }
-    .icon-pink   { background: rgba(236,72,153,0.1); }
-
-    .feature-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .feature-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ── SECTION: OPEN SOURCE CTA ── */
-    .oss-cta {
-      background: linear-gradient(135deg, #0a0f1e 0%, #0d1b2a 100%);
-      padding: 80px 24px;
-      text-align: center;
-      color: white;
-    }
-
-    .oss-cta .section-label { color: #34d399; }
-
-    .oss-cta .section-title { color: white; }
-
-    .oss-cta .section-desc {
-      color: rgba(255,255,255,0.65);
-      margin: 0 auto 40px;
-    }
-
-    .github-box {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 40px;
-      text-align: left;
-      max-width: 100%;
-    }
-
-    .github-icon {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-    }
-
-    .github-box-text strong {
-      display: block;
-      color: white;
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .github-box-text span {
-      color: rgba(255,255,255,0.5);
-      font-size: 13px;
-    }
-
-    .oss-actions {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ── ROADMAP ── */
-    .roadmap-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 14px;
-    }
-
     .roadmap-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      background: rgba(255,255,255,0.03);
+      padding: 24px;
       border-radius: var(--radius-sm);
-      padding: 16px 18px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .roadmap-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-      margin-top: 7px;
-      flex-shrink: 0;
-    }
-
-    .roadmap-item strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .roadmap-item span {
-      font-size: 13px;
-      color: var(--text-muted);
+      border-left: 4px solid var(--primary);
     }
 
     /* ── ACKNOWLEDGMENTS ── */
     .ack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 16px;
     }
 
     .ack-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border);
+      padding: 24px;
       border-radius: var(--radius-sm);
-      padding: 20px;
       text-align: center;
-      box-shadow: var(--shadow-card);
-    }
-
-    .ack-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .ack-role {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* ── THANKS NOTE ── */
-    .thanks-note {
-      background: linear-gradient(135deg, rgba(0,128,255,0.06), rgba(0,200,150,0.04));
-      border: 1px solid rgba(0,128,255,0.15);
-      border-radius: var(--radius);
-      padding: 36px 40px;
-      text-align: center;
-      margin-bottom: 0;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .thanks-note {
-        background: linear-gradient(135deg, rgba(0,128,255,0.1), rgba(0,200,150,0.06));
-        border-color: rgba(0,128,255,0.25);
-      }
-    }
-
-    .thanks-note p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .thanks-note strong {
-      color: var(--text);
     }
 
     /* ── FOOTER ── */
     .site-footer {
-      background: var(--bg-card);
+      background: #020617;
+      padding: 80px 24px 40px;
       border-top: 1px solid var(--border);
-      padding: 36px 24px;
       text-align: center;
     }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      margin-bottom: 20px;
-    }
+    .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; }
+    .footer-links a { color: var(--text-secondary); font-weight: 600; }
 
-    .footer-links a {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
+    /* ── ANIMATIONS ── */
+    [data-aos] { pointer-events: none; }
+    .aos-animate { pointer-events: auto; }
 
-    .footer-links a:hover { color: var(--primary); text-decoration: none; }
-
-    .footer-copy {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .hero { padding: 64px 20px 56px; }
-      .section { padding: 52px 20px; }
-      .github-box { flex-direction: column; text-align: center; padding: 24px 20px; }
-      .stats-inner { gap: 20px; }
-      .site-header { flex-direction: column; gap: 10px; text-align: center; }
+    @media (max-width: 768px) {
+      .hero { padding: 80px 20px; }
+      .github-box { flex-direction: column; text-align: center; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
-<body>
+<body onload="launchConfetti()">
 
-  <!-- HEADER -->
   <header class="site-header">
     <a href="/" class="logo">
       <div class="logo-icon">P</div>
@@ -566,419 +332,270 @@
     <span class="header-badge">Now Open Source</span>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
-    <div class="hero-eyebrow">A message from the PriceAlerts team</div>
-    <h1>
-      Thank You for<br />
-      <span>Your Trust &amp; Support</span>
-    </h1>
-    <p class="hero-sub">
-      After years of helping Canadian shoppers find the best grocery prices, PriceAlerts.org is transitioning to a new chapter. We are open-sourcing the entire platform so that developers, businesses, and communities anywhere in the world can build on what we created together.
-    </p>
-    <div class="hero-actions">
-      <a href="https://github.com/yourusername/pricealerts" class="btn btn-primary" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        View on GitHub
-      </a>
-      <a href="#features" class="btn btn-outline">
-        See All Features
-      </a>
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-eyebrow" data-aos="fade-down">A message from the PriceAlerts team</div>
+      <h1 data-aos="fade-up" data-aos-delay="100">
+        Thank You for<br />
+        <span>Your Trust &amp; Support</span>
+      </h1>
+      <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+        After years of helping Canadian shoppers find the best grocery prices, PriceAlerts.org is transitioning to a new chapter. We are open-sourcing the entire platform so that developers, businesses, and communities anywhere in the world can build on what we created together.
+      </p>
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+        <a href="https://github.com/yourusername/pricealerts" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="#features" class="btn btn-outline">
+          See All Features
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- STATS BAR -->
   <div class="stats-bar">
     <div class="stats-inner">
-      <div class="stat">
-        <span class="stat-number">248+</span>
-        <span class="stat-label">Crawler Patterns Supported</span>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="100">
+        <div class="stat-number">248+</div>
+        <div class="stat-label">Crawler Patterns</div>
       </div>
-      <div class="stat">
-        <span class="stat-number">50+</span>
-        <span class="stat-label">API Endpoints</span>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="200">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">API Endpoints</div>
       </div>
-      <div class="stat">
-        <span class="stat-number">17</span>
-        <span class="stat-label">Ad Placement Locations</span>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="300">
+        <div class="stat-number">17</div>
+        <div class="stat-label">Ad Placements</div>
       </div>
-      <div class="stat">
-        <span class="stat-number">10K+</span>
-        <span class="stat-label">Products Supported</span>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="400">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Products</div>
       </div>
-      <div class="stat">
-        <span class="stat-number">MIT</span>
-        <span class="stat-label">Open Source License</span>
+      <div class="stat" data-aos="zoom-in" data-aos-delay="500">
+        <div class="stat-number">MIT</div>
+        <div class="stat-label">License</div>
       </div>
     </div>
   </div>
 
-  <!-- FEATURES -->
   <section class="section" id="features">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-aos="fade-up">
         <div class="section-label">Platform Features</div>
         <h2 class="section-title">Everything Built Into One Platform</h2>
         <p class="section-desc">A production-ready grocery price comparison engine, built and battle-tested over years of real-world use.</p>
       </div>
 
-      <!-- USER FEATURES -->
-      <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">For Shoppers</h3>
-      <div class="feature-grid" style="margin-bottom:40px;">
-
-        <div class="feature-card">
-          <div class="feature-icon icon-blue">💰</div>
+      <h3 style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--primary);margin-bottom:24px;">For Shoppers</h3>
+      <div class="feature-grid" style="margin-bottom:60px;">
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">💰</span>
           <div class="feature-title">Real-Time Price Comparison</div>
           <p class="feature-desc">See prices from multiple stores displayed side-by-side on a single product page. No more checking store by store.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-green">📈</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">📈</span>
           <div class="feature-title">Price History Charts</div>
           <p class="feature-desc">Interactive line charts showing how a product's price has changed over time, so shoppers know when to buy.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-orange">📍</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">📍</span>
           <div class="feature-title">Location-Based Store Finder</div>
           <p class="feature-desc">Find stores near you using browser geolocation with latitude/longitude distance calculations via Geolib.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-purple">🔍</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">🔍</span>
           <div class="feature-title">Advanced Product Search</div>
           <p class="feature-desc">Full-text search across product names, brands, categories, and UPC barcodes with instant results.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-teal">🔥</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🔥</span>
           <div class="feature-title">Trending Products</div>
           <p class="feature-desc">Powered by Google Analytics 4 — shows what products are being viewed most right now, updated hourly.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-red">🏷️</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">🏷️</span>
           <div class="feature-title">City-Specific Deals</div>
           <p class="feature-desc">Deals and price drops organized by city, so shoppers see what's on sale near them, not on the other side of the country.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-blue">📱</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">📱</span>
           <div class="feature-title">Mobile-First Responsive Design</div>
           <p class="feature-desc">Built mobile-first. Looks great on phones, tablets, and desktops without any separate mobile site.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-yellow">🌙</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🌙</span>
           <div class="feature-title">Dark Mode / Light Mode</div>
           <p class="feature-desc">Automatically follows the user's system preference, with a manual toggle. All components themed consistently.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-green">🗺️</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">🗺️</span>
           <div class="feature-title">Category &amp; Brand Browsing</div>
           <p class="feature-desc">Full hierarchical category tree and brand pages so users can browse by what they're looking for, not just search.</p>
         </div>
-
       </div>
 
-      <!-- ADMIN FEATURES -->
-      <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">For Site Owners</h3>
-      <div class="feature-grid" style="margin-bottom:40px;">
-
-        <div class="feature-card">
-          <div class="feature-icon icon-blue">⚙️</div>
+      <h3 style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:24px;">For Site Owners</h3>
+      <div class="feature-grid" style="margin-bottom:60px;">
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">⚙️</span>
           <div class="feature-title">Full Admin Dashboard</div>
           <p class="feature-desc">A comprehensive control panel to manage products, stores, prices, integrations, ad blocks, meta tags, and blog content — all in one place.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-green">🔄</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🔄</span>
           <div class="feature-title">Automated Data Sync</div>
           <p class="feature-desc">Schedule automatic syncs from Google Sheets (via JSONSheets.com), Clover POS, or any REST API. Prices stay current without manual updates.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-orange">📊</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">📊</span>
           <div class="feature-title">Google Sheets Integration</div>
           <p class="feature-desc">Use a simple Google Sheet as your product and pricing database. JSONSheets.com turns it into a live JSON API — no code needed.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-purple">💳</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">💳</span>
           <div class="feature-title">Clover POS Integration</div>
           <p class="feature-desc">Connect directly to Clover point-of-sale systems via OAuth for real-time inventory and pricing data from retail stores.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-teal">📝</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">📝</span>
           <div class="feature-title">Built-In Blog / CMS</div>
           <p class="feature-desc">A full content management system for publishing SEO-optimized articles, grocery tips, and promotional content without a separate CMS tool.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-yellow">💵</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">💵</span>
           <div class="feature-title">Google AdSense Integration</div>
           <p class="feature-desc">17 configurable ad placement locations across the site. Ads are styled natively to match your theme for a seamless user experience.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-red">🌟</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">🌟</span>
           <div class="feature-title">Featured Products System</div>
           <p class="feature-desc">Highlight specific products on the homepage or category pages, with geographic targeting to show different products to users in different cities.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-pink">🖼️</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🖼️</span>
           <div class="feature-title">Bunny CDN Image Hosting</div>
           <p class="feature-desc">Automatic product image upload, optimization, and delivery via Bunny CDN. Weekly image sync job keeps images fresh and properly sized.</p>
         </div>
-
       </div>
 
-      <!-- TECHNICAL FEATURES -->
-      <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Technical &amp; SEO</h3>
+      <h3 style="font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:24px;">Technical &amp; SEO</h3>
       <div class="feature-grid">
-
-        <div class="feature-card">
-          <div class="feature-icon icon-blue">🤖</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">🤖</span>
           <div class="feature-title">Bot-Targeted SSR for 248+ Crawlers</div>
           <p class="feature-desc">Server-side rendering is triggered for verified search engine bots and social media crawlers, delivering pre-rendered HTML with full semantic content and meta tags.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-green">🗺️</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🗺️</span>
           <div class="feature-title">Scalable Sitemap Index</div>
           <p class="feature-desc">Auto-generated XML sitemaps split into index files for products, stores, categories, cities, and blog posts. Handles hundreds of thousands of URLs.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-purple">🔗</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">🔗</span>
           <div class="feature-title">Comprehensive SEO Meta Tags</div>
           <p class="feature-desc">Every page has unique title tags, meta descriptions, Open Graph images, breadcrumb structured data (JSON-LD), canonical URLs, and Twitter Cards.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-orange">⚡</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">⚡</span>
           <div class="feature-title">Performance Optimizations</div>
           <p class="feature-desc">LRU cache with TTL, cursor-based pagination, bulk database operations, optimized single-JOIN SQL queries, and controlled parallel batch processing.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-teal">🔒</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🔒</span>
           <div class="feature-title">Security &amp; Rate Limiting</div>
           <p class="feature-desc">Express rate limiting, Zod input validation, bcrypt authentication, OAuth state protection with expiration and one-time-use enforcement, and bot blocking.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-blue">🌐</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">🌐</span>
           <div class="feature-title">Multi-Currency Support</div>
           <p class="feature-desc">Built for the Canadian market (CAD default) but supports USD, EUR, GBP, and other currencies. Geographic data (lat/lng) supports international expansion.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-yellow">📡</div>
+        <div class="feature-card" data-aos="fade-up">
+          <span class="feature-icon">📡</span>
           <div class="feature-title">XML Product Feeds</div>
           <p class="feature-desc">Auto-generated XML product feeds and Google Merchant Center feeds for retailer partnerships and comparison shopping engine submissions.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-red">🛠️</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="feature-icon">🛠️</span>
           <div class="feature-title">50+ RESTful API Endpoints</div>
           <p class="feature-desc">A full public API covering products, stores, categories, cities, deals, price history, trending products, blog posts, and SEO metadata — all returning JSON.</p>
         </div>
-
-        <div class="feature-card">
-          <div class="feature-icon icon-pink">🗃️</div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="feature-icon">🗃️</span>
           <div class="feature-title">Drizzle ORM + PostgreSQL</div>
           <p class="feature-desc">Type-safe database layer using Drizzle ORM on Neon serverless PostgreSQL. Schema-first design with shared types between frontend and backend via TypeScript.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- OPEN SOURCE CTA -->
-  <section class="oss-cta">
+  <section class="section" style="background: rgba(255,255,255,0.02); text-align: center;">
     <div class="container">
-      <div class="section-label">Open Source</div>
-      <h2 class="section-title">The Code Is Yours</h2>
-      <p class="section-desc">We're releasing the complete, production-ready codebase under the MIT License — free to use, fork, modify, and build on for personal or commercial projects.</p>
+      <div class="section-label" data-aos="fade-up">Open Source</div>
+      <h2 class="section-title" data-aos="fade-up">The Code Is Yours</h2>
+      <p class="section-desc" data-aos="fade-up">We're releasing the complete, production-ready codebase under the MIT License — free to use, fork, modify, and build on.</p>
 
-      <div class="github-box">
-        <svg class="github-icon" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      <div class="github-box" data-aos="zoom-in">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         <div class="github-box-text">
           <strong>github.com/yourusername/pricealerts</strong>
-          <span>MIT License &mdash; Star, Fork, Contribute</span>
+          <span style="color: var(--text-muted); font-size: 14px;">MIT License &mdash; Star, Fork, Contribute</span>
         </div>
       </div>
 
-      <div class="oss-actions">
-        <a href="https://github.com/yourusername/pricealerts" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          View GitHub Repository
-        </a>
-        <a href="https://github.com/yourusername/pricealerts/fork" class="btn btn-outline" target="_blank" rel="noopener">
-          Fork the Project
-        </a>
-        <a href="https://github.com/yourusername/pricealerts/blob/main/CONTRIBUTING.md" class="btn btn-outline" target="_blank" rel="noopener">
-          Contributing Guide
-        </a>
+      <div class="hero-actions">
+        <a href="https://github.com/yourusername/pricealerts" class="btn btn-primary" target="_blank" rel="noopener">View GitHub Repository</a>
+        <a href="https://github.com/yourusername/pricealerts/fork" class="btn btn-outline" target="_blank" rel="noopener">Fork Project</a>
       </div>
     </div>
   </section>
 
-  <!-- ROADMAP -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">What's Next</div>
-        <h2 class="section-title">Roadmap for Contributors</h2>
-        <p class="section-desc">These are the features we planned but didn't get to ship. They're waiting for you.</p>
-      </div>
-      <div class="roadmap-grid">
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Mobile App</strong>
-            <span>Native iOS &amp; Android with barcode scanning</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Price Drop Alerts</strong>
-            <span>Email/push notifications when prices hit your target</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Shopping Lists</strong>
-            <span>Save products and track their prices over time</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>US &amp; UK Expansion</strong>
-            <span>Store integrations for international markets</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Flyer OCR Scanning</strong>
-            <span>Automatically extract prices from store flyers</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>User Accounts</strong>
-            <span>Save preferences, favourites, and shopping history</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Community Pricing</strong>
-            <span>Let users submit in-store prices they find</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Browser Extension</strong>
-            <span>Compare prices while shopping online at any retailer</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>More POS Integrations</strong>
-            <span>Square, Shopify POS, Lightspeed support</span>
-          </div>
-        </div>
-        <div class="roadmap-item">
-          <div class="roadmap-dot"></div>
-          <div>
-            <strong>Nutrition Data</strong>
-            <span>Health scores and nutritional info per product</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACKNOWLEDGMENTS -->
   <section class="section">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">Acknowledgments</div>
-        <h2 class="section-title">Built on the Shoulders of Giants</h2>
-        <p class="section-desc">None of this would exist without these incredible projects and services.</p>
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-label">What's Next</div>
+        <h2 class="section-title">Roadmap for Contributors</h2>
       </div>
-      <div class="ack-grid">
-        <div class="ack-card">
-          <div class="ack-name">React</div>
-          <div class="ack-role">User Interface Framework</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Express.js</div>
-          <div class="ack-role">Web Server Framework</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Drizzle ORM</div>
-          <div class="ack-role">Type-Safe Database Toolkit</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Neon</div>
-          <div class="ack-role">Serverless PostgreSQL</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Tailwind CSS</div>
-          <div class="ack-role">Styling Framework</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">shadcn/ui</div>
-          <div class="ack-role">Accessible UI Components</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Bunny CDN</div>
-          <div class="ack-role">Image CDN &amp; Delivery</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">SearchUPCData.com</div>
-          <div class="ack-role">Product Information &amp; UPC Data</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">JSONSheets.com</div>
-          <div class="ack-role">Google Sheets &rarr; JSON API</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">TanStack Query</div>
-          <div class="ack-role">Server State Management</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Recharts</div>
-          <div class="ack-role">Price History Charts</div>
-        </div>
-        <div class="ack-card">
-          <div class="ack-name">Clover</div>
-          <div class="ack-role">Point-of-Sale Integration</div>
-        </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="0"><strong>Mobile App</strong><span>Native iOS &amp; Android with barcode scanning</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="50"><strong>Price Drop Alerts</strong><span>Email/push notifications when prices hit target</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="100"><strong>Shopping Lists</strong><span>Save products and track prices over time</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="150"><strong>US &amp; UK Expansion</strong><span>Store integrations for international markets</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="200"><strong>Flyer OCR Scanning</strong><span>Automatically extract prices from flyers</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="250"><strong>User Accounts</strong><span>Save preferences and shopping history</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="300"><strong>Community Pricing</strong><span>Let users submit in-store prices</span></div>
+        <div class="roadmap-item" data-aos="fade-right" data-aos-delay="350"><strong>Browser Extension</strong><span>Compare prices while shopping online</span></div>
       </div>
     </div>
   </section>
 
-  <!-- THANK YOU NOTE -->
-  <section class="section section-alt">
+  <section class="section" style="background: rgba(16, 185, 129, 0.05);">
     <div class="container">
-      <div class="thanks-note">
-        <p>
+      <div class="section-header" data-aos="fade-up">
+        <h2 class="section-title">Acknowledgments</h2>
+      </div>
+      <div class="ack-grid">
+        <div class="ack-card"><strong>React</strong><span>UI Framework</span></div>
+        <div class="ack-card"><strong>Express.js</strong><span>Server</span></div>
+        <div class="ack-card"><strong>Drizzle ORM</strong><span>Database</span></div>
+        <div class="ack-card"><strong>Neon</strong><span>Serverless Postgres</span></div>
+        <div class="ack-card"><strong>Tailwind CSS</strong><span>Styling</span></div>
+        <div class="ack-card"><strong>shadcn/ui</strong><span>UI Library</span></div>
+        <div class="ack-card"><strong>Bunny CDN</strong><span>Images</span></div>
+        <div class="ack-card"><strong>JSONSheets</strong><span>Sheets to API</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <div class="feature-card" style="max-width: 800px; margin: 0 auto; padding: 60px;">
+        <p style="font-size: 20px; line-height: 1.8; color: var(--text-secondary);">
           To every shopper who used PriceAlerts to save money on groceries, every store owner who trusted us with their data, and every developer who reached out with ideas —
-          <strong>thank you.</strong><br /><br />
+          <strong style="color: var(--primary);">thank you.</strong><br /><br />
           This project started as a simple idea: make grocery prices transparent for everyday people. That idea lives on in the open-source code. We hope it helps someone, somewhere, build something even better.
           <br /><br />
           &mdash; The PriceAlerts Team &bull; <a href="mailto:contactus@pricealerts.org">contactus@pricealerts.org</a>
@@ -987,19 +604,46 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-links">
-      <a href="https://github.com/yourusername/pricealerts" target="_blank" rel="noopener">GitHub Repository</a>
-      <a href="https://github.com/yourusername/pricealerts/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
-      <a href="https://github.com/yourusername/pricealerts/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
-      <a href="https://github.com/yourusername/pricealerts/issues" target="_blank" rel="noopener">Report an Issue</a>
+      <a href="https://github.com/yourusername/pricealerts">GitHub Repository</a>
+      <a href="https://github.com/yourusername/pricealerts/blob/main/LICENSE">MIT License</a>
       <a href="mailto:contactus@pricealerts.org">Contact Us</a>
     </div>
-    <p class="footer-copy">
+    <p style="color: var(--text-muted); font-size: 13px;">
       &copy; 2024 PriceAlerts &bull; Released under the MIT License &bull; Made with care for grocery shoppers everywhere
     </p>
   </footer>
 
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+    
+    function launchConfetti() {
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 3,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#10b981', '#3b82f6']
+        });
+        confetti({
+          particleCount: 3,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#10b981', '#3b82f6']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+  </script>
 </body>
 </html>
