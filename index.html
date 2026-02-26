@@ -1,179 +1,1005 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>PriceAlerts | Open Source Grocery Price Comparison Platform</title>
-    <meta name="description" content="The 'Kayak for groceries' is now open source. A production-ready platform for real-time grocery price comparison built with React 18, TypeScript, Node.js, and PostgreSQL.">
-    <meta name="keywords" content="open source grocery price comparison, price tracker, react grocery app, node.js price engine, postgresql grocery database, grocery deals platform">
-    <link rel="canonical" href="https://pricealerts.org/" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PriceAlerts — Thank You | Now Open Source</title>
+  <meta name="description" content="PriceAlerts is now open source. Thank you to every shopper, contributor, and partner who trusted us. The grocery price comparison platform lives on — free for everyone to use, build, and improve." />
+  <meta name="robots" content="index, follow" />
 
-    <meta property="og:title" content="PriceAlerts - Open Source Grocery Comparison Engine">
-    <meta property="og:description" content="Build your own grocery price comparison site with our production-ready, full-stack open source platform.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://pricealerts.org/">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=PriceAlerts+Open+Source+Platform">
+  <!-- Open Graph -->
+  <meta property="og:title" content="PriceAlerts — Thank You | Now Open Source" />
+  <meta property="og:description" content="PriceAlerts is now open source. Thank you to every shopper, contributor, and partner who trusted us." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pricealerts.org" />
 
-    <style>
-        :root {
-            --green: #22c55e;
-            --dark: #0f172a;
-            --slate: #475569;
-            --light: #f8fafc;
-        }
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PriceAlerts — Thank You | Now Open Source" />
+  <meta name="twitter:description" content="PriceAlerts is now open source. The grocery price comparison platform lives on — free for everyone." />
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: #fff;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-        /* Hero Section */
-        .hero {
-            padding: 100px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .hero h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 20px; line-height: 1; }
-        .hero p { font-size: 1.25rem; color: var(--slate); max-width: 800px; margin: 0 auto 30px; }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Main Content */
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
-        
-        .section-title { font-size: 2.2rem; text-align: center; margin-bottom: 50px; }
+    :root {
+      --primary: #0080ff;
+      --primary-dark: #0066cc;
+      --bg: #f8f9fc;
+      --bg-card: #ffffff;
+      --bg-hero: #0a0f1e;
+      --text: #1a1f36;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      --border: #e2e8f0;
+      --border-card: #edf2f7;
+      --green: #22c55e;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-hover: 0 8px 24px rgba(0,128,255,0.12);
+    }
 
-        /* Feature Grid */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-        .card {
-            padding: 40px;
-            border-radius: 20px;
-            background: #fff;
-            border: 1px solid #f1f5f9;
-            transition: all 0.3s ease;
-        }
-        .card:hover { border-color: var(--green); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .card h3 { font-size: 1.25rem; margin-bottom: 15px; color: var(--dark); }
-        .card p { font-size: 0.95rem; color: var(--slate); }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --bg-card: #161b22;
+        --text: #e6edf3;
+        --text-secondary: #8b949e;
+        --text-muted: #6e7681;
+        --border: #30363d;
+        --border-card: #21262d;
+        --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+        --shadow-hover: 0 8px 24px rgba(0,128,255,0.2);
+      }
+    }
 
-        /* Technical Specs */
-        .tech-box {
-            background: var(--dark);
-            color: #fff;
-            padding: 60px 40px;
-            border-radius: 24px;
-            margin: 60px 0;
-            text-align: center;
-        }
-        .tech-tags {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 30px;
-        }
-        .tag {
-            background: rgba(255,255,255,0.1);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* CTA Buttons */
-        .btn {
-            display: inline-block;
-            background: var(--green);
-            color: white;
-            padding: 18px 36px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: opacity 0.2s;
-        }
-        .btn:hover { opacity: 0.9; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
 
-        .footer {
-            text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid #e2e8f0;
-            color: var(--slate);
-        }
-        .footer a { color: var(--green); text-decoration: none; font-weight: 600; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-        }
-    </style>
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .header-badge {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffc107;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .header-badge {
+        background: #332d00;
+        color: #ffc107;
+        border-color: #664e00;
+      }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg-hero);
+      background-image: radial-gradient(ellipse at 20% 50%, rgba(0,128,255,0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, rgba(0,200,150,0.08) 0%, transparent 50%);
+      padding: 96px 24px 80px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(0,128,255,0.2);
+      border: 1px solid rgba(0,128,255,0.4);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #60a5fa;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 60px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: rgba(255,255,255,0.7);
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      text-decoration: none;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); text-decoration: none; }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 14px rgba(0,128,255,0.4);
+    }
+
+    .btn-primary:hover { box-shadow: 0 6px 20px rgba(0,128,255,0.5); opacity: 0.93; }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.14); }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline-dark:hover { background: rgba(0,128,255,0.06); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--primary);
+      padding: 20px 24px;
+    }
+
+    .stats-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .stat {
+      text-align: center;
+      color: white;
+    }
+
+    .stat-number {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.85;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      padding: 72px 24px;
+    }
+
+    .section-alt {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    /* ── FEATURE GRID ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+      flex-shrink: 0;
+    }
+
+    .icon-blue   { background: rgba(0,128,255,0.1); }
+    .icon-green  { background: rgba(34,197,94,0.1); }
+    .icon-purple { background: rgba(139,92,246,0.1); }
+    .icon-orange { background: rgba(249,115,22,0.1); }
+    .icon-teal   { background: rgba(20,184,166,0.1); }
+    .icon-red    { background: rgba(239,68,68,0.1); }
+    .icon-yellow { background: rgba(234,179,8,0.1); }
+    .icon-pink   { background: rgba(236,72,153,0.1); }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── SECTION: OPEN SOURCE CTA ── */
+    .oss-cta {
+      background: linear-gradient(135deg, #0a0f1e 0%, #0d1b2a 100%);
+      padding: 80px 24px;
+      text-align: center;
+      color: white;
+    }
+
+    .oss-cta .section-label { color: #34d399; }
+
+    .oss-cta .section-title { color: white; }
+
+    .oss-cta .section-desc {
+      color: rgba(255,255,255,0.65);
+      margin: 0 auto 40px;
+    }
+
+    .github-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      text-align: left;
+      max-width: 100%;
+    }
+
+    .github-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .github-box-text strong {
+      display: block;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .github-box-text span {
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+
+    .oss-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .roadmap-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .roadmap-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .roadmap-item strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .roadmap-item span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── ACKNOWLEDGMENTS ── */
+    .ack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .ack-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .ack-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .ack-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── THANKS NOTE ── */
+    .thanks-note {
+      background: linear-gradient(135deg, rgba(0,128,255,0.06), rgba(0,200,150,0.04));
+      border: 1px solid rgba(0,128,255,0.15);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .thanks-note {
+        background: linear-gradient(135deg, rgba(0,128,255,0.1), rgba(0,200,150,0.06));
+        border-color: rgba(0,128,255,0.25);
+      }
+    }
+
+    .thanks-note p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .thanks-note strong {
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .footer-links a:hover { color: var(--primary); text-decoration: none; }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 64px 20px 56px; }
+      .section { padding: 52px 20px; }
+      .github-box { flex-direction: column; text-align: center; padding: 24px 20px; }
+      .stats-inner { gap: 20px; }
+      .site-header { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="container">
-            <h1>The "Kayak for Groceries" is now <span style="color: var(--green);">Open Source</span></h1>
-            <p>PriceAlerts.org has transitioned into a production-ready, full-stack open source platform. We've released our entire architecture to help developers build the next generation of price comparison tools.</p>
-            <a href="https://github.com/yourusername/pricealerts" class="btn">View Source on GitHub</a>
+  <!-- HEADER -->
+  <header class="site-header">
+    <a href="/" class="logo">
+      <div class="logo-icon">P</div>
+      PriceAlerts
+    </a>
+    <span class="header-badge">Now Open Source</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">A message from the PriceAlerts team</div>
+    <h1>
+      Thank You for<br />
+      <span>Your Trust &amp; Support</span>
+    </h1>
+    <p class="hero-sub">
+      After years of helping Canadian shoppers find the best grocery prices, PriceAlerts.org is transitioning to a new chapter. We are open-sourcing the entire platform so that developers, businesses, and communities anywhere in the world can build on what we created together.
+    </p>
+    <div class="hero-actions">
+      <a href="https://github.com/yourusername/pricealerts" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+      <a href="#features" class="btn btn-outline">
+        See All Features
+      </a>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat">
+        <span class="stat-number">248+</span>
+        <span class="stat-label">Crawler Patterns Supported</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">50+</span>
+        <span class="stat-label">API Endpoints</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">17</span>
+        <span class="stat-label">Ad Placement Locations</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">10K+</span>
+        <span class="stat-label">Products Supported</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">MIT</span>
+        <span class="stat-label">Open Source License</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Platform Features</div>
+        <h2 class="section-title">Everything Built Into One Platform</h2>
+        <p class="section-desc">A production-ready grocery price comparison engine, built and battle-tested over years of real-world use.</p>
+      </div>
+
+      <!-- USER FEATURES -->
+      <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">For Shoppers</h3>
+      <div class="feature-grid" style="margin-bottom:40px;">
+
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">💰</div>
+          <div class="feature-title">Real-Time Price Comparison</div>
+          <p class="feature-desc">See prices from multiple stores displayed side-by-side on a single product page. No more checking store by store.</p>
         </div>
-    </section>
 
-    <main class="container">
-        <h2 class="section-title">A Professional Comparison Engine</h2>
-
-        
-
-        <div class="features">
-            <div class="card">
-                <h3>Real-Time Comparison</h3>
-                <p>Advanced engine designed for side-by-side product comparisons with interactive Recharts-powered historical price tracking.</p>
-            </div>
-            <div class="card">
-                <h3>Automated Data Flow</h3>
-                <p>Sync store inventory effortlessly via Google Sheets, Clover POS, or RESTful APIs. Built-in lifecycle management for products and UPC data.</p>
-            </div>
-            <div class="card">
-                <h3>SEO & SSR First</h3>
-                <p>Engineered for high visibility with bot-targeted Server Side Rendering, dynamic sitemaps, and full Open Graph coverage.</p>
-            </div>
-            <div class="card">
-                <h3>Scalable Architecture</h3>
-                <p>Optimized with server-side pagination, bulk database operations, and LRU caching with TTL for lightning-fast performance.</p>
-            </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-green">📈</div>
+          <div class="feature-title">Price History Charts</div>
+          <p class="feature-desc">Interactive line charts showing how a product's price has changed over time, so shoppers know when to buy.</p>
         </div>
 
-        <div class="tech-box">
-            <h2>Powered by a Modern Tech Stack</h2>
-            <div class="tech-tags">
-                <span class="tag">React 18</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Drizzle ORM</span>
-                <span class="tag">Tailwind CSS</span>
-                <span class="tag">shadcn/ui</span>
-            </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-orange">📍</div>
+          <div class="feature-title">Location-Based Store Finder</div>
+          <p class="feature-desc">Find stores near you using browser geolocation with latitude/longitude distance calculations via Geolib.</p>
         </div>
 
-        
+        <div class="feature-card">
+          <div class="feature-icon icon-purple">🔍</div>
+          <div class="feature-title">Advanced Product Search</div>
+          <p class="feature-desc">Full-text search across product names, brands, categories, and UPC barcodes with instant results.</p>
+        </div>
 
-    </main>
+        <div class="feature-card">
+          <div class="feature-icon icon-teal">🔥</div>
+          <div class="feature-title">Trending Products</div>
+          <p class="feature-desc">Powered by Google Analytics 4 — shows what products are being viewed most right now, updated hourly.</p>
+        </div>
 
-    <footer class="footer">
-        <p>Ready to launch your own comparison engine?</p>
-        <p style="margin-top: 15px;">
-            <a href="https://github.com/yourusername/pricealerts" class="btn" style="padding: 12px 24px;">Clone the Repo</a>
+        <div class="feature-card">
+          <div class="feature-icon icon-red">🏷️</div>
+          <div class="feature-title">City-Specific Deals</div>
+          <p class="feature-desc">Deals and price drops organized by city, so shoppers see what's on sale near them, not on the other side of the country.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">📱</div>
+          <div class="feature-title">Mobile-First Responsive Design</div>
+          <p class="feature-desc">Built mobile-first. Looks great on phones, tablets, and desktops without any separate mobile site.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-yellow">🌙</div>
+          <div class="feature-title">Dark Mode / Light Mode</div>
+          <p class="feature-desc">Automatically follows the user's system preference, with a manual toggle. All components themed consistently.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-green">🗺️</div>
+          <div class="feature-title">Category &amp; Brand Browsing</div>
+          <p class="feature-desc">Full hierarchical category tree and brand pages so users can browse by what they're looking for, not just search.</p>
+        </div>
+
+      </div>
+
+      <!-- ADMIN FEATURES -->
+      <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">For Site Owners</h3>
+      <div class="feature-grid" style="margin-bottom:40px;">
+
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">⚙️</div>
+          <div class="feature-title">Full Admin Dashboard</div>
+          <p class="feature-desc">A comprehensive control panel to manage products, stores, prices, integrations, ad blocks, meta tags, and blog content — all in one place.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-green">🔄</div>
+          <div class="feature-title">Automated Data Sync</div>
+          <p class="feature-desc">Schedule automatic syncs from Google Sheets (via JSONSheets.com), Clover POS, or any REST API. Prices stay current without manual updates.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-orange">📊</div>
+          <div class="feature-title">Google Sheets Integration</div>
+          <p class="feature-desc">Use a simple Google Sheet as your product and pricing database. JSONSheets.com turns it into a live JSON API — no code needed.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-purple">💳</div>
+          <div class="feature-title">Clover POS Integration</div>
+          <p class="feature-desc">Connect directly to Clover point-of-sale systems via OAuth for real-time inventory and pricing data from retail stores.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-teal">📝</div>
+          <div class="feature-title">Built-In Blog / CMS</div>
+          <p class="feature-desc">A full content management system for publishing SEO-optimized articles, grocery tips, and promotional content without a separate CMS tool.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-yellow">💵</div>
+          <div class="feature-title">Google AdSense Integration</div>
+          <p class="feature-desc">17 configurable ad placement locations across the site. Ads are styled natively to match your theme for a seamless user experience.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-red">🌟</div>
+          <div class="feature-title">Featured Products System</div>
+          <p class="feature-desc">Highlight specific products on the homepage or category pages, with geographic targeting to show different products to users in different cities.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-pink">🖼️</div>
+          <div class="feature-title">Bunny CDN Image Hosting</div>
+          <p class="feature-desc">Automatic product image upload, optimization, and delivery via Bunny CDN. Weekly image sync job keeps images fresh and properly sized.</p>
+        </div>
+
+      </div>
+
+      <!-- TECHNICAL FEATURES -->
+      <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:16px;">Technical &amp; SEO</h3>
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">🤖</div>
+          <div class="feature-title">Bot-Targeted SSR for 248+ Crawlers</div>
+          <p class="feature-desc">Server-side rendering is triggered for verified search engine bots and social media crawlers, delivering pre-rendered HTML with full semantic content and meta tags.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-green">🗺️</div>
+          <div class="feature-title">Scalable Sitemap Index</div>
+          <p class="feature-desc">Auto-generated XML sitemaps split into index files for products, stores, categories, cities, and blog posts. Handles hundreds of thousands of URLs.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-purple">🔗</div>
+          <div class="feature-title">Comprehensive SEO Meta Tags</div>
+          <p class="feature-desc">Every page has unique title tags, meta descriptions, Open Graph images, breadcrumb structured data (JSON-LD), canonical URLs, and Twitter Cards.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-orange">⚡</div>
+          <div class="feature-title">Performance Optimizations</div>
+          <p class="feature-desc">LRU cache with TTL, cursor-based pagination, bulk database operations, optimized single-JOIN SQL queries, and controlled parallel batch processing.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-teal">🔒</div>
+          <div class="feature-title">Security &amp; Rate Limiting</div>
+          <p class="feature-desc">Express rate limiting, Zod input validation, bcrypt authentication, OAuth state protection with expiration and one-time-use enforcement, and bot blocking.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">🌐</div>
+          <div class="feature-title">Multi-Currency Support</div>
+          <p class="feature-desc">Built for the Canadian market (CAD default) but supports USD, EUR, GBP, and other currencies. Geographic data (lat/lng) supports international expansion.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-yellow">📡</div>
+          <div class="feature-title">XML Product Feeds</div>
+          <p class="feature-desc">Auto-generated XML product feeds and Google Merchant Center feeds for retailer partnerships and comparison shopping engine submissions.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-red">🛠️</div>
+          <div class="feature-title">50+ RESTful API Endpoints</div>
+          <p class="feature-desc">A full public API covering products, stores, categories, cities, deals, price history, trending products, blog posts, and SEO metadata — all returning JSON.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon icon-pink">🗃️</div>
+          <div class="feature-title">Drizzle ORM + PostgreSQL</div>
+          <p class="feature-desc">Type-safe database layer using Drizzle ORM on Neon serverless PostgreSQL. Schema-first design with shared types between frontend and backend via TypeScript.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN SOURCE CTA -->
+  <section class="oss-cta">
+    <div class="container">
+      <div class="section-label">Open Source</div>
+      <h2 class="section-title">The Code Is Yours</h2>
+      <p class="section-desc">We're releasing the complete, production-ready codebase under the MIT License — free to use, fork, modify, and build on for personal or commercial projects.</p>
+
+      <div class="github-box">
+        <svg class="github-icon" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <div class="github-box-text">
+          <strong>github.com/yourusername/pricealerts</strong>
+          <span>MIT License &mdash; Star, Fork, Contribute</span>
+        </div>
+      </div>
+
+      <div class="oss-actions">
+        <a href="https://github.com/yourusername/pricealerts" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View GitHub Repository
+        </a>
+        <a href="https://github.com/yourusername/pricealerts/fork" class="btn btn-outline" target="_blank" rel="noopener">
+          Fork the Project
+        </a>
+        <a href="https://github.com/yourusername/pricealerts/blob/main/CONTRIBUTING.md" class="btn btn-outline" target="_blank" rel="noopener">
+          Contributing Guide
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">What's Next</div>
+        <h2 class="section-title">Roadmap for Contributors</h2>
+        <p class="section-desc">These are the features we planned but didn't get to ship. They're waiting for you.</p>
+      </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Mobile App</strong>
+            <span>Native iOS &amp; Android with barcode scanning</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Price Drop Alerts</strong>
+            <span>Email/push notifications when prices hit your target</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Shopping Lists</strong>
+            <span>Save products and track their prices over time</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>US &amp; UK Expansion</strong>
+            <span>Store integrations for international markets</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Flyer OCR Scanning</strong>
+            <span>Automatically extract prices from store flyers</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>User Accounts</strong>
+            <span>Save preferences, favourites, and shopping history</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Community Pricing</strong>
+            <span>Let users submit in-store prices they find</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Browser Extension</strong>
+            <span>Compare prices while shopping online at any retailer</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>More POS Integrations</strong>
+            <span>Square, Shopify POS, Lightspeed support</span>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div>
+            <strong>Nutrition Data</strong>
+            <span>Health scores and nutritional info per product</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACKNOWLEDGMENTS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Acknowledgments</div>
+        <h2 class="section-title">Built on the Shoulders of Giants</h2>
+        <p class="section-desc">None of this would exist without these incredible projects and services.</p>
+      </div>
+      <div class="ack-grid">
+        <div class="ack-card">
+          <div class="ack-name">React</div>
+          <div class="ack-role">User Interface Framework</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Express.js</div>
+          <div class="ack-role">Web Server Framework</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Drizzle ORM</div>
+          <div class="ack-role">Type-Safe Database Toolkit</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Neon</div>
+          <div class="ack-role">Serverless PostgreSQL</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Tailwind CSS</div>
+          <div class="ack-role">Styling Framework</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">shadcn/ui</div>
+          <div class="ack-role">Accessible UI Components</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Bunny CDN</div>
+          <div class="ack-role">Image CDN &amp; Delivery</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">SearchUPCData.com</div>
+          <div class="ack-role">Product Information &amp; UPC Data</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">JSONSheets.com</div>
+          <div class="ack-role">Google Sheets &rarr; JSON API</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">TanStack Query</div>
+          <div class="ack-role">Server State Management</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Recharts</div>
+          <div class="ack-role">Price History Charts</div>
+        </div>
+        <div class="ack-card">
+          <div class="ack-name">Clover</div>
+          <div class="ack-role">Point-of-Sale Integration</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THANK YOU NOTE -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="thanks-note">
+        <p>
+          To every shopper who used PriceAlerts to save money on groceries, every store owner who trusted us with their data, and every developer who reached out with ideas —
+          <strong>thank you.</strong><br /><br />
+          This project started as a simple idea: make grocery prices transparent for everyday people. That idea lives on in the open-source code. We hope it helps someone, somewhere, build something even better.
+          <br /><br />
+          &mdash; The PriceAlerts Team &bull; <a href="mailto:contactus@pricealerts.org">contactus@pricealerts.org</a>
         </p>
-        <p style="margin-top: 40px; font-size: 0.9rem;">
-            Support, Bugs & Improvements: <a href="mailto:admin@pricealerts.org">admin@pricealerts.org</a>
-        </p>
-    </footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://github.com/yourusername/pricealerts" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="https://github.com/yourusername/pricealerts/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      <a href="https://github.com/yourusername/pricealerts/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+      <a href="https://github.com/yourusername/pricealerts/issues" target="_blank" rel="noopener">Report an Issue</a>
+      <a href="mailto:contactus@pricealerts.org">Contact Us</a>
+    </div>
+    <p class="footer-copy">
+      &copy; 2024 PriceAlerts &bull; Released under the MIT License &bull; Made with care for grocery shoppers everywhere
+    </p>
+  </footer>
 
 </body>
 </html>
