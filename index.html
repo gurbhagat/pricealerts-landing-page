@@ -5,191 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>PriceAlerts | Open Source Grocery Price Comparison Platform</title>
-    <meta name="description" content="PriceAlerts is a production-ready, open-source grocery price comparison engine. Build your own 'Kayak for groceries' using React, Node.js, and PostgreSQL.">
-    <meta name="keywords" content="open source, price comparison, grocery tracker, react project, node.js, postgresql, grocery deals, price history charts">
+    <meta name="description" content="The 'Kayak for groceries' is now open source. A production-ready platform for real-time grocery price comparison built with React 18, TypeScript, Node.js, and PostgreSQL.">
+    <meta name="keywords" content="open source grocery price comparison, price tracker, react grocery app, node.js price engine, postgresql grocery database, grocery deals platform">
     <link rel="canonical" href="https://pricealerts.org/" />
 
-    <meta property="og:title" content="PriceAlerts - Open Source Grocery Comparison">
-    <meta property="og:description" content="The production-ready platform for tracking grocery prices is now open to the community.">
+    <meta property="og:title" content="PriceAlerts - Open Source Grocery Comparison Engine">
+    <meta property="og:description" content="Build your own grocery price comparison site with our production-ready, full-stack open source platform.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pricealerts.org/">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=PriceAlerts+Open+Source+Platform">
 
     <style>
         :root {
-            --primary: #22c55e;
-            --secondary: #0f172a;
-            --slate-100: #f1f5f9;
-            --slate-600: #475569;
-            --slate-900: #0f172a;
+            --green: #22c55e;
+            --dark: #0f172a;
+            --slate: #475569;
+            --light: #f8fafc;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            color: var(--slate-900);
-            line-height: 1.7;
-            background: #fff;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #fff;
         }
 
-        .navbar {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--slate-100);
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .logo-text { font-weight: 800; font-size: 1.25rem; color: var(--secondary); letter-spacing: -0.5px; }
-
+        /* Hero Section */
         .hero {
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
-            background: radial-gradient(circle at top right, #f0fdf4, #fff);
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            border-bottom: 1px solid #e2e8f0;
         }
+        .hero h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 20px; line-height: 1; }
+        .hero p { font-size: 1.25rem; color: var(--slate); max-width: 800px; margin: 0 auto 30px; }
 
-        .hero h1 { font-size: 3.5rem; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
-        .hero p { font-size: 1.25rem; color: var(--slate-600); max-width: 700px; margin: 0 auto 30px; }
+        /* Main Content */
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        
+        .section-title { font-size: 2.2rem; text-align: center; margin-bottom: 50px; }
 
-        .section { max-width: 1000px; margin: 60px auto; padding: 0 20px; }
-        .section-title { font-size: 2rem; margin-bottom: 40px; text-align: center; }
-
-        .features-grid {
+        /* Feature Grid */
+        .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
-
-        .feature-item {
-            padding: 30px;
-            border: 1px solid var(--slate-100);
-            border-radius: 16px;
-            transition: 0.3s;
+        .card {
+            padding: 40px;
+            border-radius: 20px;
+            background: #fff;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
         }
-        .feature-item:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .feature-item h3 { margin-bottom: 10px; color: var(--secondary); }
+        .card:hover { border-color: var(--green); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .card h3 { font-size: 1.25rem; margin-bottom: 15px; color: var(--dark); }
+        .card p { font-size: 0.95rem; color: var(--slate); }
 
-        .tech-pill-container {
+        /* Technical Specs */
+        .tech-box {
+            background: var(--dark);
+            color: #fff;
+            padding: 60px 40px;
+            border-radius: 24px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        .tech-tags {
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 30px;
         }
-        .tech-pill {
-            background: var(--slate-100);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: 600;
         }
 
-        .cta-footer {
-            background: var(--secondary);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-            margin-top: 100px;
-        }
-
-        .btn-github {
+        /* CTA Buttons */
+        .btn {
             display: inline-block;
-            background: var(--primary);
+            background: var(--green);
             color: white;
             padding: 18px 36px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
-            margin-top: 20px;
+            transition: opacity 0.2s;
         }
+        .btn:hover { opacity: 0.9; }
 
-        .details-list {
-            list-style: none;
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid #e2e8f0;
+            color: var(--slate);
         }
-        .details-list li::before { content: "✓ "; color: var(--primary); font-weight: bold; }
+        .footer a { color: var(--green); text-decoration: none; font-weight: 600; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .details-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo-text">PriceAlerts.org</div>
-        <div>
-            <a href="https://github.com/yourusername/pricealerts" style="text-decoration: none; color: var(--slate-600); font-weight: 600;">GitHub</a>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="section">
-            <h1>The Kayak for Groceries is now <span style="color: var(--primary);">Open Source</span></h1>
-            <p>We’ve sunset our hosted service to empower the developer community. PriceAlerts is now a production-ready platform for real-time price comparison and automated deal discovery.</p>
-            <a href="https://github.com/yourusername/pricealerts" class="btn-github">Clone the Repository</a>
-        </div>
-    </header>
-
-    
-
-    <main class="section">
-        <h2 class="section-title">Fully-Featured & Production Ready</h2>
-        
-        <div class="features-grid">
-            <div class="feature-item">
-                <h3>Real-Time Comparison</h3>
-                <p>Advanced engine to compare prices across multiple stores side-by-side with interactive Recharts-powered price history.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Automated Data Sync</h3>
-                <p>Supports Google Sheets (via JSONSheets.com), Clover POS API, and custom REST integrations for auto-updating prices.</p>
-            </div>
-            <div class="feature-item">
-                <h3>SEO & SSR Optimized</h3>
-                <p>Built-in Server Side Rendering for crawlers, automatic sitemaps, and Schema.org JSON-LD structured data.</p>
-            </div>
-            <div class="feature-item">
-                <h3>Modern Tech Stack</h3>
-                <div class="tech-pill-container">
-                    <span class="tech-pill">React 18</span>
-                    <span class="tech-pill">TypeScript</span>
-                    <span class="tech-pill">Node.js</span>
-                    <span class="tech-pill">PostgreSQL</span>
-                    <span class="tech-pill">Tailwind CSS</span>
-                </div>
-            </div>
-        </div>
-
-        <ul class="details-list">
-            <li>Interactive Price History Charts</li>
-            <li>Admin Dashboard for Site Owners</li>
-            <li>Dark / Light Mode Support</li>
-            <li>Mobile Responsive (PWA Ready)</li>
-            <li>Google Analytics 4 Integration</li>
-            <li>Ad Management (17 Native Slots)</li>
-            <li>City-Based Deal Discovery</li>
-            <li>Multi-Currency Support</li>
-        </ul>
-    </main>
-
-    
-
-    <section class="cta-footer">
-        <div class="section">
-            <h2>Start building today.</h2>
-            <p style="color: #94a3b8; margin-bottom: 30px;">Released under the MIT License. Free for personal and commercial use.</p>
-            <a href="https://github.com/yourusername/pricealerts" class="btn-github">View on GitHub</a>
-            <p style="margin-top: 40px; font-size: 0.9rem;">
-                Support & Bug Reports: <a href="mailto:admin@pricealerts.org" style="color: var(--primary);">admin@pricealerts.org</a>
-            </p>
+    <section class="hero">
+        <div class="container">
+            <h1>The "Kayak for Groceries" is now <span style="color: var(--green);">Open Source</span></h1>
+            <p>PriceAlerts.org has transitioned into a production-ready, full-stack open source platform. We've released our entire architecture to help developers build the next generation of price comparison tools.</p>
+            <a href="https://github.com/yourusername/pricealerts" class="btn">View Source on GitHub</a>
         </div>
     </section>
+
+    <main class="container">
+        <h2 class="section-title">A Professional Comparison Engine</h2>
+
+        
+
+        <div class="features">
+            <div class="card">
+                <h3>Real-Time Comparison</h3>
+                <p>Advanced engine designed for side-by-side product comparisons with interactive Recharts-powered historical price tracking.</p>
+            </div>
+            <div class="card">
+                <h3>Automated Data Flow</h3>
+                <p>Sync store inventory effortlessly via Google Sheets, Clover POS, or RESTful APIs. Built-in lifecycle management for products and UPC data.</p>
+            </div>
+            <div class="card">
+                <h3>SEO & SSR First</h3>
+                <p>Engineered for high visibility with bot-targeted Server Side Rendering, dynamic sitemaps, and full Open Graph coverage.</p>
+            </div>
+            <div class="card">
+                <h3>Scalable Architecture</h3>
+                <p>Optimized with server-side pagination, bulk database operations, and LRU caching with TTL for lightning-fast performance.</p>
+            </div>
+        </div>
+
+        <div class="tech-box">
+            <h2>Powered by a Modern Tech Stack</h2>
+            <div class="tech-tags">
+                <span class="tag">React 18</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Drizzle ORM</span>
+                <span class="tag">Tailwind CSS</span>
+                <span class="tag">shadcn/ui</span>
+            </div>
+        </div>
+
+        
+
+    </main>
+
+    <footer class="footer">
+        <p>Ready to launch your own comparison engine?</p>
+        <p style="margin-top: 15px;">
+            <a href="https://github.com/yourusername/pricealerts" class="btn" style="padding: 12px 24px;">Clone the Repo</a>
+        </p>
+        <p style="margin-top: 40px; font-size: 0.9rem;">
+            Support, Bugs & Improvements: <a href="mailto:admin@pricealerts.org">admin@pricealerts.org</a>
+        </p>
+    </footer>
 
 </body>
 </html>
